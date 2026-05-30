@@ -144,6 +144,7 @@ nav::after {
   position: relative;
   z-index: 1;
   max-width: 900px;
+  padding-top: 5rem;
 }
 
 .hero-eyebrow {
