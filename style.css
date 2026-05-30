@@ -45,7 +45,7 @@ body.light-mode {
   --accent: #8a6f4e;
   --accent-hot: #6b5135;
 
-  --nav-bg: rgba(240, 237, 232, 0.85);
+  --nav-bg: rgba(138, 111, 78, 0.5);
   --card-bg: rgba(240, 237, 232, 0.95);
   --card-border: rgba(138, 111, 78, 0.15);
   --card-border-hover: rgba(138, 111, 78, 0.45);
