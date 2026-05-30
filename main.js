@@ -39,6 +39,7 @@ document.querySelectorAll('a, button, .project-card').forEach(el => {
   });
 });
 
+
 // ─── SCROLL REVEAL ───
 
 const revealEls = document.querySelectorAll('.reveal');
@@ -46,7 +47,13 @@ const revealEls = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
-      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+        // if the revealed element is a glitchFX, fire it
+        if (entry.target.classList.contains('glitchFX')) {
+          setTimeout(() => runGlitch(entry.target), i * 80);
+        }
+      }, i * 80);
       observer.unobserve(entry.target);
     }
   });
@@ -59,59 +66,73 @@ revealEls.forEach(el => observer.observe(el));
 const toggle = document.getElementById('theme-toggle');
 let isLight = false;
 let loopTimer = null;
-let showingMoon = false;
+let showingAlt = false;
 
-// Swap faces every 2.2s in a loop
 function startLoop() {
   loopTimer = setInterval(() => {
-    showingMoon = !showingMoon;
-    toggle.classList.toggle('show-moon', showingMoon);
+    showingAlt = !showingAlt;
+    if (isLight) {
+      toggle.classList.toggle('show-moon', showingAlt);
+      toggle.classList.remove('show-sun');
+    } else {
+      toggle.classList.toggle('show-sun', showingAlt);
+      toggle.classList.remove('show-moon');
+    }
   }, 2200);
 }
 
-// Kick off the loop
 startLoop();
 
 toggle.addEventListener('click', () => {
   isLight = !isLight;
   document.body.classList.toggle('light-mode', isLight);
 
-  // Snap the icon to match the mode:
-  // In light mode show moon (click to go dark), in dark mode show PG (click to go light)
-  // but let the loop keep running from current state — just reset phase
   clearInterval(loopTimer);
-  showingMoon = isLight;
-  toggle.classList.toggle('show-moon', showingMoon);
+  showingAlt = false;
+  toggle.classList.remove('show-moon', 'show-sun');
   startLoop();
 });
+
 
 //Glitch Text Effect
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+function runGlitch(element) {
+  let iteration = 0;
+  const target = element.dataset.value;
+  if (!target) return;
+
+  // clear any running interval on this element
+  if (element._glitchInterval) clearInterval(element._glitchInterval);
+
+  element._glitchInterval = setInterval(() => {
+    element.innerText = element.innerText
+      .split("")
+      .map((letter, index) =>
+        index < iteration
+          ? target[index]
+          : letters[Math.floor(Math.random() * 26)]
+      )
+      .join("");
+
+    if (iteration >= target.length) {
+      clearInterval(element._glitchInterval);
+    }
+
+    iteration += 1 / 3;
+  }, 30);
+}
+
+// Mouseover still works on all glitchFX elements
 document.querySelectorAll(".glitchFX").forEach(element => {
-  let interval = null;
+  element.addEventListener("mouseover", () => runGlitch(element));
+});
 
-  element.addEventListener("mouseover", event => {
-    let iteration = 0;
-
-    clearInterval(interval);
-
-    interval = setInterval(() => {
-      event.target.innerText = event.target.innerText
-        .split("")
-        .map((letter, index) =>
-          index < iteration
-            ? event.target.dataset.value[index]
-            : letters[Math.floor(Math.random() * 26)]
-        )
-        .join("");
-
-      if (iteration >= event.target.dataset.value.length) {
-        clearInterval(interval);
-      }
-
-      iteration += 1 / 3;
-    }, 30);
+// Fire on page load for hero-name spans
+window.addEventListener("load", () => {
+  // stagger first name and last name slightly
+  document.querySelectorAll(".hero-name .glitchFX").forEach((el, i) => {
+    setTimeout(() => runGlitch(el), 600 + i * 300);
   });
 });
