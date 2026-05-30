@@ -53,3 +53,34 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 
 revealEls.forEach(el => observer.observe(el));
+
+// ─── THEME TOGGLE WITH LOOPING PG ↔ MOON ANIMATION ───
+
+const toggle = document.getElementById('theme-toggle');
+let isLight = false;
+let loopTimer = null;
+let showingMoon = false;
+
+// Swap faces every 2.2s in a loop
+function startLoop() {
+  loopTimer = setInterval(() => {
+    showingMoon = !showingMoon;
+    toggle.classList.toggle('show-moon', showingMoon);
+  }, 2200);
+}
+
+// Kick off the loop
+startLoop();
+
+toggle.addEventListener('click', () => {
+  isLight = !isLight;
+  document.body.classList.toggle('light-mode', isLight);
+
+  // Snap the icon to match the mode:
+  // In light mode show moon (click to go dark), in dark mode show PG (click to go light)
+  // but let the loop keep running from current state — just reset phase
+  clearInterval(loopTimer);
+  showingMoon = isLight;
+  toggle.classList.toggle('show-moon', showingMoon);
+  startLoop();
+});

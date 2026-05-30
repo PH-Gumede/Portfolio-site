@@ -11,6 +11,62 @@
   --smoke-dim: #b8b4ad;
   --accent: #c8b89a;
   --accent-hot: #e8d5b7;
+
+  /* ─── LIGHT MODE OVERRIDE VARS ─── */
+  --nav-bg: rgba(0, 0, 0, 0.7);
+  --card-bg: rgba(43, 45, 47, 0.9);
+  --card-border: rgba(200, 184, 154, 0.12);
+  --card-border-hover: rgba(200, 184, 154, 0.4);
+  --section-bg: transparent;
+  --thumb-grid-line: rgba(200, 184, 154, 0.05);
+  --contact-card-bg: rgba(200, 184, 154, 0.03);
+  --contact-card-border: rgba(200, 184, 154, 0.12);
+  --footer-border: rgba(200, 184, 154, 0.1);
+  --footer-logo: rgba(200, 184, 154, 0.3);
+  --nav-border: rgba(200, 184, 154, 0.15);
+  --social-link-border: rgba(200, 184, 154, 0.15);
+  --social-link-hover-bg: rgba(200, 184, 154, 0.05);
+  --social-link-hover-border: rgba(200, 184, 154, 0.4);
+  --hero-gradient-start: rgba(43, 45, 47, 0.3);
+  --hero-gradient-mid: rgba(43, 45, 47, 0.7);
+  --hero-gradient-end: rgba(43, 45, 47, 0.97);
+  --tag-border: rgba(200, 184, 154, 0.2);
+  --skill-tag-border: rgba(200, 184, 154, 0.18);
+  --hero-link-border: rgba(200, 184, 154, 0.3);
+  --cursor-blend: screen;
+}
+
+/* ─── LIGHT MODE ─── */
+
+body.light-mode {
+  --ash: #f0ede8;
+  --ash-light: #e2ddd6;
+  --smoke: #2b2d2f;
+  --smoke-dim: #5a5750;
+  --accent: #8a6f4e;
+  --accent-hot: #6b5135;
+
+  --nav-bg: rgba(240, 237, 232, 0.85);
+  --card-bg: rgba(240, 237, 232, 0.95);
+  --card-border: rgba(138, 111, 78, 0.15);
+  --card-border-hover: rgba(138, 111, 78, 0.45);
+  --section-bg: transparent;
+  --thumb-grid-line: rgba(138, 111, 78, 0.07);
+  --contact-card-bg: rgba(138, 111, 78, 0.04);
+  --contact-card-border: rgba(138, 111, 78, 0.15);
+  --footer-border: rgba(138, 111, 78, 0.15);
+  --footer-logo: rgba(138, 111, 78, 0.35);
+  --nav-border: rgba(138, 111, 78, 0.18);
+  --social-link-border: rgba(138, 111, 78, 0.2);
+  --social-link-hover-bg: rgba(138, 111, 78, 0.06);
+  --social-link-hover-border: rgba(138, 111, 78, 0.45);
+  --hero-gradient-start: rgba(240, 237, 232, 0.1);
+  --hero-gradient-mid: rgba(240, 237, 232, 0.55);
+  --hero-gradient-end: rgba(240, 237, 232, 0.96);
+  --tag-border: rgba(138, 111, 78, 0.22);
+  --skill-tag-border: rgba(138, 111, 78, 0.2);
+  --hero-link-border: rgba(138, 111, 78, 0.35);
+  --cursor-blend: multiply;
 }
 
 html {
@@ -23,6 +79,7 @@ body {
   font-family: 'Syne', sans-serif;
   overflow-x: hidden;
   cursor: none;
+  transition: background 0.4s, color 0.4s;
 }
 
 /* ─── CUSTOM CURSOR ─── */
@@ -37,7 +94,7 @@ body {
   z-index: 10000;
   transform: translate(-50%, -50%);
   transition: width 0.15s, height 0.15s, background 0.15s;
-  mix-blend-mode: screen;
+  mix-blend-mode: var(--cursor-blend);
 }
 
 #cursor-ring {
@@ -64,8 +121,9 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 3rem;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--nav-bg);
   backdrop-filter: blur(10px) saturate(180%);
+  transition: background-color 0.4s;
 }
 
 nav::after {
@@ -75,7 +133,8 @@ nav::after {
   left: 3rem;
   right: 3rem;
   height: 1px;
-  background: rgba(200, 184, 154, 0.15);
+  background: var(--nav-border);
+  transition: background 0.4s;
 }
 
 .nav-logo {
@@ -84,6 +143,71 @@ nav::after {
   letter-spacing: 0.12em;
   color: var(--accent);
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: none;
+
+  /* toggle container */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(200, 184, 154, 0.2);
+  transition: border-color 0.25s, background 0.25s, color 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-logo:hover {
+  border-color: var(--accent);
+  background: rgba(200, 184, 154, 0.08);
+}
+
+/* ─── LOGO TOGGLE FACES ─── */
+
+.logo-pg,
+.logo-moon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.35s, transform 0.35s;
+}
+
+.logo-pg {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  transition: opacity 0.35s, transform 0.35s, color 0.4s;
+}
+
+.logo-moon {
+  opacity: 0;
+  transform: rotate(-30deg) scale(0.7);
+  color: var(--accent);
+  transition: opacity 0.35s, transform 0.35s, color 0.4s;
+}
+
+.logo-moon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* animate-to-moon state — set by JS during loop */
+.nav-logo.show-moon .logo-pg {
+  opacity: 0;
+  transform: rotate(30deg) scale(0.7);
+}
+
+.nav-logo.show-moon .logo-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
 
 .nav-links {
@@ -137,9 +261,10 @@ nav::after {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(43, 45, 47, 0.3) 0%, rgba(43, 45, 47, 0.7) 60%, rgba(43, 45, 47, 0.97) 100%),
+    linear-gradient(to bottom, var(--hero-gradient-start) 0%, var(--hero-gradient-mid) 60%, var(--hero-gradient-end) 100%),
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="900"><defs><radialGradient id="g" cx="40%25" cy="35%25" r="60%25"><stop offset="0%25" stop-color="%23c8a87a" stop-opacity="0.12"/><stop offset="100%25" stop-color="%23111" stop-opacity="0"/></radialGradient></defs><rect width="800" height="900" fill="%231a1c1e"/><rect width="800" height="900" fill="url(%23g)"/><rect x="180" y="80" width="440" height="640" rx="220" fill="%23c8b89a" opacity="0.04"/></svg>') center / cover no-repeat;
   z-index: 0;
+  transition: background 0.4s;
 }
 
 .hero-content {
@@ -205,11 +330,11 @@ nav::after {
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid rgba(200, 184, 154, 0.3);
+  border: 1px solid var(--hero-link-border);
   border-radius: 50%;
   color: var(--accent);
   text-decoration: none;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s, color 0.4s;
 }
 
 .hero-links a:hover {
@@ -241,7 +366,7 @@ nav::after {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--smoke-dim);
-  border: 1px solid rgba(200, 184, 154, 0.18);
+  border: 1px solid var(--skill-tag-border);
   border-radius: 2px;
   padding: 5px 12px;
   transition: color 0.2s, border-color 0.2s;
@@ -332,7 +457,7 @@ section {
 
 .project-card {
   position: relative;
-  border: 1px solid rgba(200, 184, 154, 0.12);
+  border: 1px solid var(--card-border);
   border-radius: 4px;
   overflow: hidden;
   transition: border-color 0.3s, transform 0.3s;
@@ -340,7 +465,7 @@ section {
 }
 
 .project-card:hover {
-  border-color: rgba(200, 184, 154, 0.4);
+  border-color: var(--card-border-hover);
   transform: translateY(-4px);
 }
 
@@ -366,8 +491,8 @@ section {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(200, 184, 154, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 184, 154, 0.05) 1px, transparent 1px);
+    linear-gradient(var(--thumb-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--thumb-grid-line) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -400,7 +525,8 @@ section {
 
 .project-info {
   padding: 1.5rem;
-  background: rgba(43, 45, 47, 0.9);
+  background: var(--card-bg);
+  transition: background 0.4s;
 }
 
 .project-number {
@@ -439,7 +565,7 @@ section {
   font-size: 0.6rem;
   letter-spacing: 0.1em;
   padding: 3px 8px;
-  border: 1px solid rgba(200, 184, 154, 0.2);
+  border: 1px solid var(--tag-border);
   border-radius: 2px;
   color: var(--smoke-dim);
 }
@@ -511,7 +637,7 @@ section {
   letter-spacing: 0.1em;
   color: var(--smoke-dim);
   text-decoration: none;
-  border: 1px solid rgba(200, 184, 154, 0.15);
+  border: 1px solid var(--social-link-border);
   border-radius: 2px;
   padding: 0.6rem 1rem;
   transition: color 0.2s, border-color 0.2s, background 0.2s;
@@ -519,8 +645,8 @@ section {
 
 .social-links a:hover {
   color: var(--smoke);
-  border-color: rgba(200, 184, 154, 0.4);
-  background: rgba(200, 184, 154, 0.05);
+  border-color: var(--social-link-hover-border);
+  background: var(--social-link-hover-bg);
 }
 
 .social-links a svg {
@@ -531,9 +657,10 @@ section {
 
 .contact-availability {
   padding: 2rem;
-  border: 1px solid rgba(200, 184, 154, 0.12);
+  border: 1px solid var(--contact-card-border);
   border-radius: 4px;
-  background: rgba(200, 184, 154, 0.03);
+  background: var(--contact-card-bg);
+  transition: background 0.4s, border-color 0.4s;
 }
 
 .availability-status {
@@ -581,11 +708,12 @@ section {
 /* ─── FOOTER ─── */
 
 footer {
-  border-top: 1px solid rgba(200, 184, 154, 0.1);
+  border-top: 1px solid var(--footer-border);
   padding: 2rem 3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: border-color 0.4s;
 }
 
 .footer-copy {
@@ -600,7 +728,8 @@ footer {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1rem;
   letter-spacing: 0.15em;
-  color: rgba(200, 184, 154, 0.3);
+  color: var(--footer-logo);
+  transition: color 0.4s;
 }
 
 /* ─── ANIMATIONS ─── */
