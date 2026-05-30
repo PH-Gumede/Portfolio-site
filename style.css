@@ -467,9 +467,16 @@ section {
   cursor: none;
 }
 
+a.project-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .project-card:hover {
   border-color: var(--card-border-hover);
   transform: translateY(-4px);
+  cursor: pointer;
 }
 
 .project-thumb {
