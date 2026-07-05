@@ -557,6 +557,13 @@ a.project-card {
   transition: transform 0.5s ease;
 }
 
+.thumb-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fills the container like an image */
+  display: block;
+}
+
 .project-card:hover .thumb-img {
   transform: scale(1.04);
 }
