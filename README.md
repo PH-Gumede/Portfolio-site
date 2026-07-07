@@ -21,13 +21,13 @@ This is my developer portfolio — the site recruiters land on first. It exists 
 
 ## Features
 
-- 🖱️ **Custom animated cursor** — a two-part cursor (a solid dot plus a lagging outer ring) that smoothly trails the real cursor and grows on hover over interactive elements.
-- ✨ **Glitch-text reveal** — my name and section labels scramble through random letters before resolving into place, triggered on page load and again on hover.
-- 🌗 **Dark/light theme toggle** — every colour on the page is driven by CSS custom properties, so switching themes recolours the entire site instantly. The toggle button itself loops a small "PG → sun/moon" animation to hint that it's interactive.
-- 📜 **Scroll-triggered reveals** — sections fade and slide into view the first time they enter the viewport, staggered slightly for a cascading effect.
-- 🗂️ **Project showcase grid** — six project cards, each linking out to either a live deployment or the project's GitHub repository, tagged with the technologies used.
-- 📬 **Contact & availability section** — current location, availability status, and direct links to email, GitHub, and LinkedIn.
-- 📱 **Responsive layout** — a dedicated breakpoint reflows the layout, contact grid, and spacing for smaller screens.
+-  **Custom animated cursor** — a two-part cursor (a solid dot plus a lagging outer ring) that smoothly trails the real cursor and grows on hover over interactive elements.
+-  **Glitch-text reveal** — my name and section labels scramble through random letters before resolving into place, triggered on page load and again on hover.
+-  **Dark/light theme toggle** — every colour on the page is driven by CSS custom properties, so switching themes recolours the entire site instantly. The toggle button itself loops a small "PG → sun/moon" animation to hint that it's interactive.
+-  **Scroll-triggered reveals** — sections fade and slide into view the first time they enter the viewport, staggered slightly for a cascading effect.
+-  **Project showcase grid** — six project cards, each linking out to either a live deployment or the project's GitHub repository, tagged with the technologies used.
+-  **Contact & availability section** — current location, availability status, and direct links to email, GitHub, and LinkedIn.
+-  **Responsive layout** — a dedicated breakpoint reflows the layout, contact grid, and spacing for smaller screens.
 
 ## Screenshots / Demo
 
